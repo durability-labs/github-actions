@@ -69,8 +69,8 @@ jobs:
         uses: fabiocaccamo/create-matrix-action@v5
         with:
           matrix: |
-            os {linux}, arch {amd64}, builder {$${{ env.amd64_builder }}}
-            os {linux}, arch {arm64}, builder {$${{ env.arm64_builder }}}
+            os {linux}, arch {amd64}, builder {${{ env.amd64_builder }}}
+            os {linux}, arch {arm64}, builder {${{ env.arm64_builder }}}
 
   # Build platform specific image
   build:

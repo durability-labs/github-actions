@@ -19,16 +19,18 @@
 
 #### Inputs
 
-| Variable         | Description                        |
-| ---------------- | ---------------------------------- |
-| `docker_file`    | Path to Dockerfile                 |
-| `dockerhub_repo` | DockerHub repository               |
-| `build_args`     | Build arguments                    |
-| `tag_latest`     | Set latest tag for Docker images   |
-| `tag_sha`        | Set Git short commit as Docker tag |
-| `tag_suffix`     | Suffix for Docker images tag       |
-| `amd64_builder`  | Builder for amd64                  |
-| `arm64_builder`  | Builder for arm64                  |
+| Variable               | Description                        | Default             |
+| ---------------------- | ---------------------------------- | ------------------- |
+| `docker_file`          | Path to Dockerfile                 | `docker/Dockerfile` |
+| `dockerhub_repo`       | DockerHub repository               | `codexstorage/test` |
+| `build_args`           | Build arguments                    | `''`                |
+| `tag_latest`           | Set latest tag for Docker images   | `true`              |
+| `tag_sha`              | Set Git short commit as Docker tag | `true`              |
+| `tag_suffix`           | Suffix for Docker images tag       | `''`                |
+| `checkout-fetch-depth` | actions/checkout fetch-depth       | `''`                |
+| `checkout-fetch-tags`  | actions/checkout fetch-tags        | `''`                |
+| `amd64_builder`        | Builder for amd64                  | `ubuntu-22.04`      |
+| `arm64_builder`        | Builder for arm64                  | `ubuntu-22.04-arm`  |
 
 
 #### Secrets
@@ -78,10 +80,14 @@ jobs:
     with:
       docker_file: docker/Dockerfile
       dockerhub_repo: codexstorage/test
-      tag_latest: ${{ github.ref_name == github.event.repository.default_branch || startsWith(github.ref, 'refs/tags/') }}
-      amd64_builder: ubuntu-24.04
       build_args: |
         VITE_CODEX_API_URL=${VITE_CODEX_API_URL}
         VITE_GEO_IP_URL="Plain text"
+      tag_latest: ${{ github.ref_name == github.event.repository.default_branch || startsWith(github.ref, 'refs/tags/') }}
+      tag_suffix: 'custom'
+      checkout-fetch-depth: 0
+      checkout-fetch-tags: true
+      amd64_builder: ubuntu-24.04
+      arm64_builder: ubuntu-24.04-arm
     secrets: inherit
 ```

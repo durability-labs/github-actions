@@ -34,6 +34,16 @@ on:
         description: Suffix for Docker images tag
         required: false
         type: string
+      checkout-fetch-depth:
+        default: ''
+        description: actions/checkout fetch-depth
+        required: false
+        type: string
+      checkout-fetch-tags:
+        default: ''
+        description: actions/checkout fetch-tags
+        required: false
+        type: string
       amd64_builder:
         default: ubuntu-22.04
         description: Builder for amd64
@@ -53,6 +63,8 @@ env:
   TAG_LATEST: ${{ inputs.tag_latest }}
   TAG_SHA: ${{ inputs.tag_sha }}
   TAG_SUFFIX: ${{ inputs.tag_suffix }}
+  CHECKOUT_FETCH_DEPTH: ${{ inputs.checkout-fetch-depth }}
+  CHECKOUT_FETCH_TAGS: ${{ inputs.checkout-fetch-tags }}
   amd64_builder: ${{ inputs.amd64_builder }}
   arm64_builder: ${{ inputs.arm64_builder }}
 
@@ -87,6 +99,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: ${{ env.CHECKOUT_FETCH_DEPTH }}
+          fetch-tags: ${{ env.CHECKOUT_FETCH_TAGS }}
 
       - name: Secrets to variables
         if: ${{ env.BUILD_ARGS != '' }}

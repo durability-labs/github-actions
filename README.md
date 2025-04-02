@@ -22,6 +22,7 @@
 | Variable               | Description                        | Default             |
 | ---------------------- | ---------------------------------- | ------------------- |
 | `docker_file`          | Path to Dockerfile                 | `docker/Dockerfile` |
+| `docker_context`       | Docker build context               | `.` |
 | `dockerhub_repo`       | DockerHub repository               | `codexstorage/test` |
 | `build_args`           | Build arguments                    | `''`                |
 | `tag_latest`           | Set latest tag for Docker images   | `true`              |

@@ -9,6 +9,11 @@ on:
         description: Dockerfile
         required: true
         type: string
+      docker_context:
+        default: .
+        description: Docker build context
+        required: true
+        type: string
       dockerhub_repo:
         default: codexstorage/test
         description: DockerHub repository
@@ -58,6 +63,7 @@ on:
 
 env:
   DOCKER_FILE: ${{ inputs.docker_file }}
+  DOCKER_CONTEXT: ${{ inputs.docker_context }}
   DOCKERHUB_REPO: ${{ inputs.dockerhub_repo }}
   BUILD_ARGS: ${{ inputs.build_args }}
   TAG_LATEST: ${{ inputs.tag_latest }}
@@ -138,7 +144,7 @@ jobs:
         id: build
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ${{ env.DOCKER_FILE }}
           file: ${{ env.DOCKER_FILE }}
           platforms: ${{ env.PLATFORM }}
           push: true

@@ -144,7 +144,7 @@ jobs:
         id: build
         uses: docker/build-push-action@v6
         with:
-          context: ${{ env.DOCKER_FILE }}
+          context: ${{ env.DOCKER_CONTEXT }}
           file: ${{ env.DOCKER_FILE }}
           platforms: ${{ env.PLATFORM }}
           push: true

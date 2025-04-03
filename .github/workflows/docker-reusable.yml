@@ -9,7 +9,7 @@ on:
         description: Dockerfile
         required: true
         type: string
-      docker_context:
+      docker_build_context:
         default: .
         description: Docker build context
         required: false
@@ -63,7 +63,7 @@ on:
 
 env:
   DOCKER_FILE: ${{ inputs.docker_file }}
-  DOCKER_CONTEXT: ${{ inputs.docker_context }}
+  DOCKER_BUILD_CONTEXT: ${{ inputs.docker_build_context }}
   DOCKERHUB_REPO: ${{ inputs.dockerhub_repo }}
   BUILD_ARGS: ${{ inputs.build_args }}
   TAG_LATEST: ${{ inputs.tag_latest }}
@@ -144,7 +144,7 @@ jobs:
         id: build
         uses: docker/build-push-action@v6
         with:
-          context: ${{ env.DOCKER_CONTEXT }}
+          context: ${{ env.DOCKER_BUILD_CONTEXT }}
           file: ${{ env.DOCKER_FILE }}
           platforms: ${{ env.PLATFORM }}
           push: true

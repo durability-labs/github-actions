@@ -31,6 +31,7 @@
 | `tag_suffix`           | Suffix for Docker images tag       | `''`                |
 | `checkout-fetch-depth` | actions/checkout fetch-depth       | `''`                |
 | `checkout-fetch-tags`  | actions/checkout fetch-tags        | `''`                |
+| `checkout-submodules`  | actions/checkout submodules        | `false`             |
 | `amd64_builder`        | Builder for amd64                  | `ubuntu-22.04`      |
 | `arm64_builder`        | Builder for arm64                  | `ubuntu-22.04-arm`  |
 

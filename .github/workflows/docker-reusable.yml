@@ -49,6 +49,11 @@ on:
         description: actions/checkout fetch-depth
         required: false
         type: string
+      checkout-submodules:
+        default: false
+        description: actions/checkout submodules
+        required: false
+        type: boolean
       checkout-fetch-tags:
         default: ''
         description: actions/checkout fetch-tags
@@ -76,6 +81,7 @@ env:
   TAG_SHA_LONG: ${{ inputs.tag_sha_long }}
   TAG_SUFFIX: ${{ inputs.tag_suffix }}
   CHECKOUT_FETCH_DEPTH: ${{ inputs.checkout-fetch-depth }}
+  CHECKOUT_SUBMODULES: ${{ inputs.checkout-submodules }}
   CHECKOUT_FETCH_TAGS: ${{ inputs.checkout-fetch-tags }}
   amd64_builder: ${{ inputs.amd64_builder }}
   arm64_builder: ${{ inputs.arm64_builder }}
@@ -114,6 +120,7 @@ jobs:
         with:
           fetch-depth: ${{ env.CHECKOUT_FETCH_DEPTH }}
           fetch-tags: ${{ env.CHECKOUT_FETCH_TAGS }}
+          submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
       - name: Secrets to variables
         if: ${{ env.BUILD_ARGS != '' }}

@@ -27,6 +27,7 @@
 | `build_args`           | Build arguments                    | `''`                |
 | `tag_latest`           | Set latest tag for Docker images   | `true`              |
 | `tag_sha`              | Set Git short commit as Docker tag | `true`              |
+| `tag_sha_long`         | Set Git long commit as Docker tag  | `false`             |
 | `tag_suffix`           | Suffix for Docker images tag       | `''`                |
 | `checkout-fetch-depth` | actions/checkout fetch-depth       | `''`                |
 | `checkout-fetch-tags`  | actions/checkout fetch-tags        | `''`                |

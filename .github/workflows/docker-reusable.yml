@@ -15,7 +15,7 @@ on:
         required: false
         type: string
       dockerhub_repo:
-        default: codexstorage/test
+        default: durabilitylabs/test
         description: DockerHub repository
         required: true
         type: string

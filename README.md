@@ -19,21 +19,21 @@
 
 #### Inputs
 
-| Variable               | Description                        | Default             |
-| ---------------------- | ---------------------------------- | ------------------- |
-| `docker_file`          | Path to Dockerfile                 | `docker/Dockerfile` |
-| `docker_build_context` | Docker build context               | `.`                 |
-| `dockerhub_repo`       | DockerHub repository               | `codexstorage/test` |
-| `build_args`           | Build arguments                    | `''`                |
-| `tag_latest`           | Set latest tag for Docker images   | `true`              |
-| `tag_sha`              | Set Git short commit as Docker tag | `true`              |
-| `tag_sha_long`         | Set Git long commit as Docker tag  | `false`             |
-| `tag_suffix`           | Suffix for Docker images tag       | `''`                |
-| `checkout-fetch-depth` | actions/checkout fetch-depth       | `''`                |
-| `checkout-fetch-tags`  | actions/checkout fetch-tags        | `''`                |
-| `checkout-submodules`  | actions/checkout submodules        | `false`             |
-| `amd64_builder`        | Builder for amd64                  | `ubuntu-22.04`      |
-| `arm64_builder`        | Builder for arm64                  | `ubuntu-22.04-arm`  |
+| Variable               | Description                        | Default              |
+| ---------------------- | ---------------------------------- | -------------------- |
+| `docker_file`          | Path to Dockerfile                 | `docker/Dockerfile`  |
+| `docker_build_context` | Docker build context               | `.`                  |
+| `dockerhub_repo`       | DockerHub repository               | `durabilitylabs/test`|
+| `build_args`           | Build arguments                    | `''`                 |
+| `tag_latest`           | Set latest tag for Docker images   | `true`               |
+| `tag_sha`              | Set Git short commit as Docker tag | `true`               |
+| `tag_sha_long`         | Set Git long commit as Docker tag  | `false`              |
+| `tag_suffix`           | Suffix for Docker images tag       | `''`                 |
+| `checkout-fetch-depth` | actions/checkout fetch-depth       | `''`                 |
+| `checkout-fetch-tags`  | actions/checkout fetch-tags        | `''`                 |
+| `checkout-submodules`  | actions/checkout submodules        | `false`              |
+| `amd64_builder`        | Builder for amd64                  | `ubuntu-22.04`       |
+| `arm64_builder`        | Builder for arm64                  | `ubuntu-22.04-arm`   |
 
 
 #### Secrets
@@ -42,7 +42,7 @@
 
  Also, we can pass secrets required by `build_args`. For that, we should set arg with a value as a variable of the secret name
  ```yaml
- VITE_CODEX_API_URL=${VITE_CODEX_API_URL}
+ VITE_ARCHIVIST_API_URL=${VITE_ARCHIVIST_API_URL}
  ```
 
 
@@ -79,12 +79,12 @@ on:
 jobs:
   build-and-push:
     name: Build and Push
-    uses: codex-storage/github-actions/.github/workflows/docker-reusable.yml@master
+    uses: durability-labs/github-actions/.github/workflows/docker-reusable.yml@master
     with:
       docker_file: docker/Dockerfile
-      dockerhub_repo: codexstorage/test
+      dockerhub_repo: durabilitylabs/test
       build_args: |
-        VITE_CODEX_API_URL=${VITE_CODEX_API_URL}
+        VITE_ARCHIVIST_API_URL=${VITE_ARCHIVIST_API_URL}
         VITE_GEO_IP_URL="Plain text"
       tag_latest: ${{ github.ref_name == github.event.repository.default_branch || startsWith(github.ref, 'refs/tags/') }}
       tag_suffix: 'custom'

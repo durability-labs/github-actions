@@ -70,7 +70,7 @@ name: Docker
 on:
   push:
     branches:
-      - master
+      - main
     tags:
       - 'v*.*.*'
   workflow_dispatch:
@@ -79,7 +79,7 @@ on:
 jobs:
   build-and-push:
     name: Build and Push
-    uses: durability-labs/github-actions/.github/workflows/docker-reusable.yml@master
+    uses: durability-labs/github-actions/.github/workflows/docker-reusable.yml@main
     with:
       docker_file: docker/Dockerfile
       dockerhub_repo: durabilitylabs/test
